@@ -1,4 +1,4 @@
-package com.evolf.ch4.condition;
+package com.evolf.ch4_AQS.condition;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

@@ -1,4 +1,4 @@
-package com.evolf.ch4.aqs;
+package com.evolf.ch4_AQS.aqs;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;

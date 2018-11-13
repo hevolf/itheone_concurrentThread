@@ -1,7 +1,7 @@
-package com.evolf.ch4.template;
+package com.evolf.ch4_AQS.template;
 
 /**
- * @author Mark
+ * @author evolf
  *模板方法的派生类
  */
 public class SendSms extends SendCustom {

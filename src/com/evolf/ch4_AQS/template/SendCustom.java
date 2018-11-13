@@ -1,9 +1,9 @@
-package com.evolf.ch4.template;
+package com.evolf.ch4_AQS.template;
 
 import java.util.Date;
 
 /**
- * @author mark
+ * @author evolf
  *模板方法的父类
  */
 public abstract class SendCustom {
@@ -16,7 +16,7 @@ public abstract class SendCustom {
 	}
 	public abstract void send();
 	
-	//框架方法-模板方法
+	//框架方法-模板方法-依次调用模板
 	public void sendMessage() {
 		to();
 		from();

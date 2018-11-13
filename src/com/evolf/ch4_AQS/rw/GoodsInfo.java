@@ -1,4 +1,4 @@
-package com.evolf.ch4.rw;
+package com.evolf.ch4_AQS.rw;
 
 /**
  *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 

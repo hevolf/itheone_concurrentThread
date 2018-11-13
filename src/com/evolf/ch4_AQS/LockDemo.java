@@ -1,4 +1,4 @@
-package com.evolf.ch4;
+package com.evolf.ch4_AQS;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
