@@ -1,13 +1,17 @@
 package com.evolf.ch1.safeend;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
  *
- *更多课程咨询 安生老师 QQ：669100976  VIP课程咨询 依娜老师  QQ：2470523467
- *
- *类说明：阻塞方法中抛出InterruptedException异常后，如果需要继续中断，需要手动再中断一次
+ *类说明：抛出InterruptedException异常的时候，要注意中断标志位
  */
 public class HasInterrputException {
+	
+	private static SimpleDateFormat formater 
+		= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss_SSS");
 	
 	private static class UseThread extends Thread{
 		
@@ -17,28 +21,31 @@ public class HasInterrputException {
 		
 		@Override
 		public void run() {
+			String threadName = Thread.currentThread().getName();
 			while(!isInterrupted()) {
 				try {
-					Thread.sleep(100);
+					System.out.println("UseThread:"+formater.format(new Date()));
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
-					System.out.println(Thread.currentThread().getName()
-							+" in InterruptedException interrupt flag is "
-							+isInterrupted());
+					System.out.println(threadName+" catch interrput flag is "
+							+isInterrupted()+ " at "
+							+(formater.format(new Date())));
 					interrupt();
 					e.printStackTrace();
 				}
-				System.out.println(Thread.currentThread().getName()
-						+ " I am extends Thread.");
+				System.out.println(threadName);				
 			}
-			System.out.println(Thread.currentThread().getName()
-					+" interrupt flag is "+isInterrupted());
+			System.out.println(threadName+" interrput flag is "
+					+isInterrupted());
 		}
 	}
 
 	public static void main(String[] args) throws InterruptedException {
 		Thread endThread = new UseThread("HasInterrputEx");
 		endThread.start();
-		Thread.sleep(500);
+		System.out.println("Main:"+formater.format(new Date()));
+		Thread.sleep(800);
+		System.out.println("Main begin interrupt thread:"+formater.format(new Date()));
 		endThread.interrupt();
 		
 
