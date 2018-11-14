@@ -15,7 +15,7 @@ public class DBPoolSemaphore {
 	private final Semaphore useful,useless;//useful表示可用的数据库连接，useless表示已用的数据库连接
 	
 	public DBPoolSemaphore() {
-		this. useful = new Semaphore(POOL_SIZE);
+		this.useful = new Semaphore(POOL_SIZE);
 		this.useless = new Semaphore(0);
 	}
 	
@@ -33,7 +33,7 @@ public class DBPoolSemaphore {
 		if(connection!=null) {
 			System.out.println("当前有"+useful.getQueueLength()+"个线程等待数据库连接！！"
 					+"可用连接数:"+useful.availablePermits());
-			useless.acquire();
+			useless.acquire();//若没有获取授权成功  当前线程会进行CAS自旋等待
 			synchronized (pool) {
 				pool.addLast(connection);
 			}	
@@ -43,10 +43,10 @@ public class DBPoolSemaphore {
 	
 	/*从池子拿连接*/
 	public Connection takeConnect() throws InterruptedException {
-		//可用线程数不足则阻塞
+		//可用线程数不足则阻塞 CAS 自旋
 		useful.acquire();//先acquire获取到许可，才可以继续执行任务，如果获取失败，则进入阻塞；处理完成之后需要release释放许可。
 		Connection conn;
-		//可用线程数多个时的并发锁 如：允许10个线程同时访问，线程需同步
+		//可用线程数多个时的并发锁 如：允许10个线程同时访问，此10个线程需同步
 		synchronized (pool) {
 			conn = pool.removeFirst();
 		}

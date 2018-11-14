@@ -3,6 +3,10 @@ package com.evolf.ch2.forkjoin.sum;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
+/**
+ * RecursiveTask
+ * @author pc-Fy
+ */
 public class SumArray {
     private static class SumTask extends RecursiveTask<Integer>{
 

@@ -18,11 +18,11 @@ public class UseAtomicReference {
         UserInfo updateUser = new UserInfo("Bill", 17);//要变化的新实例
         //user期望更改的值  updateUser更改后的新值  即该内存地址V 上的值如果是user 则更改（原子操作）
         //若内存地址v的值 和user地址的值相等 则对内存地址v的值进行更改，user不影响（只用来做比较判断）
+        System.out.println(userRef.get().toString());
+        System.out.println("------------after----------");
         userRef.compareAndSet(user, updateUser);
-        System.out.println(userRef.get().getName());
-        System.out.println(userRef.get().getAge());
-        System.out.println(user.getName());
-        System.out.println(user.getAge());        
+        System.out.println(userRef.get().toString());
+        System.out.println(user.toString());
     }
     
     //定义一个实体类
@@ -38,6 +38,14 @@ public class UseAtomicReference {
         }
         public int getAge() {
             return age;
+        }
+
+        @Override
+        public String toString() {
+            return "UserInfo{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
         }
     }
 

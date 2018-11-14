@@ -7,10 +7,12 @@ import java.util.concurrent.locks.Lock;
 
 public class SelfLock01 implements Lock {
     private static class Sync extends AbstractQueuedSynchronizer{
+        @Override
         protected boolean isHeldExclusively() {
             return getState()==1;
         }
 
+        @Override
         protected boolean tryAcquire(int arg) {
             if(compareAndSetState(0,1)) {
                 setExclusiveOwnerThread(Thread.currentThread());

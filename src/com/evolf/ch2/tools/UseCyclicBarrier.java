@@ -13,7 +13,7 @@ import java.util.concurrent.CyclicBarrier;
 public class UseCyclicBarrier {
 	
 	private static CyclicBarrier barrier 
-		= new CyclicBarrier(5,new CollectThread());
+		= new CyclicBarrier(5,new CollectThread());//new CollectThread() 所有线程到达屏障后 某个线程开始的工作
 	
     private static ConcurrentHashMap<String,Long> resultMap
             = new ConcurrentHashMap<>();//存放子线程工作结果的容器
@@ -54,7 +54,7 @@ public class UseCyclicBarrier {
                 	System.out.println("Thread_"+id+" ....do something ");
                 }
                 System.out.println(id+"....is await");
-                barrier.await();
+                barrier.await();//当前线程await  待所有线程达到await时  barrier会放行所有
             	Thread.sleep(1000+id);
                 System.out.println("Thread_"+id+" ....do its business ");
             } catch (Exception e) {

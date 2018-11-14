@@ -2,6 +2,7 @@ package com.evolf.ch2.tools;
 
 import com.evolf.tools.SleepTools;
 
+import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -20,11 +21,11 @@ public class UseCountDownLatch {
         @Override
         public void run() {
         	System.out.println("Thread_"+Thread.currentThread().getId()
-        			+" ready init work......");
+        			+" ready init work......" + new Date());
         	latch.countDown();//初始化线程完成工作了，countDown方法只扣减一次；
             for(int i =0;i<2;i++) {
             	System.out.println("Thread_"+Thread.currentThread().getId()
-            			+" ........continue do its work");
+            			+" ........continue do its work" + new Date());
             }
         }
     }
@@ -35,13 +36,13 @@ public class UseCountDownLatch {
         @Override
         public void run() {
         	try {
-				latch.await();
+				latch.await();//await 会和main 的await同时放行
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
             for(int i =0;i<3;i++) {
             	System.out.println("BusiThread_"+Thread.currentThread().getId()
-            			+" do business-----");
+            			+" do business-----"+ new Date());
             }
         }
     }
@@ -53,22 +54,22 @@ public class UseCountDownLatch {
             public void run() {
             	SleepTools.ms(1);
                 System.out.println("Thread_"+Thread.currentThread().getId()
-            			+" ready init work step 1st......");
+            			+" ready init work step 1st......" + new Date());
                 latch.countDown();//每完成一步初始化工作，扣减一次
-                System.out.println("begin step 2nd.......");
+                System.out.println("begin step 2nd......." + new Date());
                 SleepTools.ms(1);
                 System.out.println("Thread_"+Thread.currentThread().getId()
-            			+" ready init work step 2nd......");
+            			+" ready init work step 2nd......" + new Date());
                 latch.countDown();//每完成一步初始化工作，扣减一次
             }
         }).start();
-        new Thread(new BusiThread()).start();
+        new Thread(new BusiThread()).start();// await 会和main 的await同时放行
         for(int i=0;i<=3;i++){
             Thread thread = new Thread(new InitThread());
             thread.start();
         }
 
         latch.await();
-        System.out.println("Main do ites work........");
+        System.out.println("Main do ites work........ "+ new Date());
     }
 }

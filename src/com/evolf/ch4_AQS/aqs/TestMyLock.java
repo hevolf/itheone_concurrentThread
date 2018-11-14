@@ -2,6 +2,7 @@ package com.evolf.ch4_AQS.aqs;
 
 import com.evolf.tools.SleepTools;
 
+import java.util.Date;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -15,6 +16,7 @@ public class TestMyLock {
         final Lock lock = new ReentrantLock();
         
         class Worker extends Thread {
+            @Override
             public void run() {
                 while (true) {//线程不停循环争取锁
                     lock.lock();//ReentrantLock 的属性sync 调用：sycn.acquire(1); 可看做以sycn（aqs的一个内部实现）为锁
@@ -38,7 +40,7 @@ public class TestMyLock {
         // 主线程每隔1秒换行
         for (int i = 0; i < 10; i++) {
         	SleepTools.second(3);
-            System.out.println(Thread.currentThread().getName() + "main----------");
+            System.out.println(Thread.currentThread().getName() + "main----------" + new Date());
         }
     }
 

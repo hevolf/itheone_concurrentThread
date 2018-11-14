@@ -2,6 +2,7 @@ package com.evolf.ch2.future;
 
 import com.evolf.tools.SleepTools;
 
+import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -40,10 +41,13 @@ public class UseFuture {
 		new Thread(futureTask).start();
 		Random r = new Random();
 		SleepTools.second(1);
+		//若没计算完  futureTask.get()会 awaitDone()
+		System.out.println("Get UseCallable result = "+futureTask.get() + new Date());
+
 		if(r.nextBoolean()) {//随机决定是获得结果还是终止任务
 			System.out.println("Get UseCallable result = "+futureTask.get());
 		}else {
-			System.out.println("中断计算");
+			System.out.println("中断计算");//还在计算中 可以cancel
 			futureTask.cancel(true);
 		}
 		

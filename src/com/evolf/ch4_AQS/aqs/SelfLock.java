@@ -16,10 +16,12 @@ public class SelfLock implements Lock{
 	private static class Sync extends AbstractQueuedSynchronizer{
 		
 		//是否占用
+		@Override
 		protected boolean isHeldExclusively() {
 			return getState()==1;
 		}
 		//尝试获取授权
+		@Override
 		protected boolean tryAcquire(int arg) {
 			//锁初始态期望为0， 更新后期望为1 即：原子操作CAS 初始没有线程占用时为0，尝试获取时传入1
 			if(compareAndSetState(0,1)) {
@@ -30,6 +32,7 @@ public class SelfLock implements Lock{
 			return false;
 		}
 		/* 释放授权 */
+		@Override
 		protected boolean tryRelease(int arg) {
 			if(getState()==0) {
 				throw new UnsupportedOperationException();
