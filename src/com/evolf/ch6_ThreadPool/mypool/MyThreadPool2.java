@@ -1,4 +1,4 @@
-package com.evolf.ch6.mypool;
+package com.evolf.ch6_ThreadPool.mypool;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -71,7 +71,7 @@ public class MyThreadPool2 {
     }
 
     /**
-     * 内部类，工作线程
+     * 内部类，工作线程  用工作线程来取出 任务队列中的任务线程并使其run  （若工作线程!isInterrupted() 则会一直取任务队列来执行 ）
      */
     private class WorkThread extends Thread{
     	

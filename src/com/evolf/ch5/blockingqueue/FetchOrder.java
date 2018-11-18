@@ -1,4 +1,4 @@
-package com.evolf.ch5.bq;
+package com.evolf.ch5.blockingqueue;
 
 import java.util.concurrent.DelayQueue;
 

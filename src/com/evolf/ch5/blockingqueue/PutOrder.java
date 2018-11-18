@@ -1,4 +1,4 @@
-package com.evolf.ch5.bq;
+package com.evolf.ch5.blockingqueue;
 
 import java.util.concurrent.DelayQueue;
 
@@ -19,13 +19,13 @@ public class PutOrder implements Runnable {
 	@Override
 	public void run() {
 		
-		//5秒到期
+		//5秒到期  5秒后才能从队列取出（过期订单从队列移除）
 		Order ordeTb = new Order("Tb12345",366);
 		ItemVo<Order> itemTb = new ItemVo<Order>(5000,ordeTb);
 		queue.offer(itemTb);
 		System.out.println("订单5秒后到期："+ordeTb.getOrderNo());
 		
-		//8秒到期
+		//8秒到期  8秒后才能从队列取出
 		Order ordeJd = new Order("Jd54321",366);
 		ItemVo<Order> itemJd = new ItemVo<Order>(8000,ordeJd);
 		queue.offer(itemJd);

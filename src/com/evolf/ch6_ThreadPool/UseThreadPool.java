@@ -1,4 +1,4 @@
-package com.evolf.ch6;
+package com.evolf.ch6_ThreadPool;
 
 import com.evolf.tools.SleepTools;
 
@@ -60,6 +60,9 @@ public class UseThreadPool {
 //    	ExecutorService pool = new ThreadPoolExecutor(2,4,3,TimeUnit.SECONDS,
 //    			new ArrayBlockingQueue<Runnable>(10),
 //    			new ThreadPoolExecutor.DiscardOldestPolicy());
+
+
+
     	ExecutorService pool = Executors.newCachedThreadPool();//其实是比较少
     	for(int i=0;i<6;i++) {
     		Worker worker = new Worker("worker_"+i);
@@ -70,6 +73,17 @@ public class UseThreadPool {
     		Future<String> result = pool.submit(callWorker);
     		System.out.println(result.get());
     	}
+
+
+//    	当2 + 5 < 8 时 会新建线程；此时为3个线程
+//        ExecutorService pool = new ThreadPoolExecutor(2,4,3,TimeUnit.SECONDS,
+//                new ArrayBlockingQueue<Runnable>(5),
+//                new ThreadPoolExecutor.DiscardOldestPolicy());
+//        for(int i=0;i<8;i++) {
+//            Worker worker = new Worker("worker_"+i);
+//            pool.execute(worker);
+//        }
+
     	pool.shutdown();
     }
 }

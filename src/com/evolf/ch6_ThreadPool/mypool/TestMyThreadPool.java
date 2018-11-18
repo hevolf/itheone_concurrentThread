@@ -1,4 +1,4 @@
-package com.evolf.ch6.mypool;
+package com.evolf.ch6_ThreadPool.mypool;
 
 import java.util.Random;
 

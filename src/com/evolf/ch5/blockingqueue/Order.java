@@ -1,4 +1,4 @@
-package com.evolf.ch5.bq;
+package com.evolf.ch5.blockingqueue;
 
 /**
  *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 

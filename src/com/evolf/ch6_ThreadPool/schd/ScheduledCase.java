@@ -1,4 +1,4 @@
-package com.evolf.ch6.schd;
+package com.evolf.ch6_ThreadPool.schd;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
