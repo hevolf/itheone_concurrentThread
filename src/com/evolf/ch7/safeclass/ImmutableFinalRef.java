@@ -10,7 +10,7 @@ public class ImmutableFinalRef {
 	
 	private final int a;
 	private final int b;
-	private final User user;//这里，就不能保证线程安全啦
+	private final User user;//这里，就不能保证线程安全啦（引用不可变，引用指向的值可变）
 	
 	public ImmutableFinalRef(int a, int b) {
 		super();

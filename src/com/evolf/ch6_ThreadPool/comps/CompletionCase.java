@@ -4,13 +4,15 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   享学课堂 https://enjoy.ke.qq.com
+ * CompletionService 任务先有结果的先入队列，所以输出结果是有序的
  *
  *类说明：
  */
 public class CompletionCase {
     private final int POOL_SIZE = Runtime.getRuntime().availableProcessors();
     private final int TOTAL_TASK = Runtime.getRuntime().availableProcessors();
+//    private final int TOTAL_TASK = Runtime.getRuntime().availableProcessors()*10;
 
     // 方法一，自己写集合来实现获取线程池中任务的返回结果
     public void testByQueue() throws Exception {
@@ -26,12 +28,12 @@ public class CompletionCase {
         // 向里面扔任务
         for (int i = 0; i < TOTAL_TASK; i++) {
             Future<Integer> future = pool.submit(new WorkTask("ExecTask" + i));
-            queue.add(future);//i=0 先进队列，i=1的任务跟着进
+            queue.add(future);//i=0 先进队列，i=1的任务跟着进  （submit执行完后返回值加入到队列中保存）
         }
 
         // 检查线程池任务执行结果
         for (int i = 0; i < TOTAL_TASK; i++) {
-        	int sleptTime = queue.take().get();///i=0先取到，i=1的后取到
+        	int sleptTime = queue.take().get();///i=0先取到，i=1的后取到 从队列中获取任务返回结果
         	System.out.println(" slept "+sleptTime+" ms ...");        	
         	count.addAndGet(sleptTime);
         }

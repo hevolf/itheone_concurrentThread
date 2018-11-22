@@ -28,7 +28,7 @@ public class SafeOperateToo implements ITransfer {
     						//两把锁都拿到了
     	                    from.flyMoney(amount);
     	                    to.addMoney(amount);
-    	                    break;
+    	                    break;//成功拿到两把锁时才跳出，否则一直循环
     					}finally {
     						to.getLock().unlock();
     					}
@@ -37,7 +37,7 @@ public class SafeOperateToo implements ITransfer {
     				from.getLock().unlock();
     			}
     		}
-    		SleepTools.ms(r.nextInt(10));
+    		SleepTools.ms(r.nextInt(10));//每次不成功时 随机休眠
     	}
     }
 }

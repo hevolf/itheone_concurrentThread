@@ -30,6 +30,7 @@ public class UseThreadLocal {
     
     /**
      *类说明：测试线程，线程的工作是将ThreadLocal变量的值变化，并写回，看看线程之间是否会互相影响
+     *ThreadLocal变量的值不变
      */
     public static class TestThread implements Runnable{
         int id;

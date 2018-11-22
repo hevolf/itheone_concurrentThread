@@ -2,6 +2,7 @@ package com.evolf.ch7.tranfer;
 
 import com.evolf.ch7.tranfer.service.ITransfer;
 import com.evolf.ch7.tranfer.service.SafeOperateToo;
+import com.evolf.ch7.tranfer.service.TrasnferAccount;
 
 /**
  *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
@@ -43,7 +44,8 @@ public class PayCompany {
         PayCompany payCompany = new PayCompany();
         UserAccount zhangsan = new UserAccount("zhangsan",20000);
         UserAccount lisi = new UserAccount("lisi",20000);
-        ITransfer transfer = new SafeOperateToo();
+        ITransfer transfer = new TrasnferAccount();//A->B A锁住，B->A B锁住，互相等待死锁
+//        ITransfer transfer = new SafeOperateToo();
         TransferThread zhangsanToLisi = new TransferThread("zhangsanToLisi"
                 ,zhangsan,lisi,2000,transfer);
         TransferThread lisiToZhangsan = new TransferThread("lisiToZhangsan"
