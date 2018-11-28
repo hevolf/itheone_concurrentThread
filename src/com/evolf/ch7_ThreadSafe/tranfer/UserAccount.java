@@ -1,4 +1,4 @@
-package com.evolf.ch7.tranfer;
+package com.evolf.ch7_ThreadSafe.tranfer;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

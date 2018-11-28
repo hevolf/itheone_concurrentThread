@@ -22,27 +22,27 @@ public class JobInfo<R> {
 	//成功处理的任务数
 	private final AtomicInteger  successCount;
 	//已处理的任务数
-	private final AtomicInteger  taskProcesserCount;
-	//结果队列，拿结果从头拿，放结果从尾部放
+	private final AtomicInteger taskProcessedCount;
+	//结果队列，拿结果从头拿，放结果从尾部放  （Deque  DelayQueue）
 	private final LinkedBlockingDeque<TaskResult<R>> taskDetailQueue;
 	//工作的完成保存的时间，超过这个时间从缓存中清除
 	private final long expireTime;
 	
 	//与课堂上有不同，修订为，阻塞队列不应该由调用者传入，应该内部生成，长度为工作的任务个数
 	public JobInfo(String jobName, int jobLength, 
-			ITaskProcesser<?, ?> taskProcesser,
+			ITaskProcesser<?, ?> taskProcessed,
 			long expireTime) {
 		super();
 		this.jobName = jobName;
 		this.jobLength = jobLength;
-		this.taskProcesser = taskProcesser;
+		this.taskProcesser = taskProcessed;
 		this.successCount = new AtomicInteger(0);
-		this.taskProcesserCount = new AtomicInteger(0);
+		this.taskProcessedCount = new AtomicInteger(0);
 		this.taskDetailQueue = new LinkedBlockingDeque<TaskResult<R>>(jobLength);;
 		this.expireTime = expireTime;
 	}
 
-	public ITaskProcesser<?, ?> getTaskProcesser() {
+	public ITaskProcesser<?, ?> getTaskProcessed() {
 		return taskProcesser;
 	}
 
@@ -52,18 +52,18 @@ public class JobInfo<R> {
 	}
 
 	//返回当前已处理的结果数
-	public int getTaskProcesserCount() {
-		return taskProcesserCount.get();
+	public int getTaskProcessedCount() {
+		return taskProcessedCount.get();
 	}
 	
 	//提供工作中失败的次数，课堂上没有加，只是为了方便调用者使用
 	public int getFailCount() {
-		return taskProcesserCount.get() - successCount.get();
+		return taskProcessedCount.get() - successCount.get();
 	}
 	
 	public String getTotalProcess() {
 		return "Success["+successCount.get()+"]/Current["
-				+taskProcesserCount.get()+"] Total["+jobLength+"]";
+				+ taskProcessedCount.get()+"] Total["+jobLength+"]";
 	}
 	
 	//获得工作中每个任务的处理详情
@@ -80,13 +80,13 @@ public class JobInfo<R> {
 	//放任务的结果，从业务应用角度来说，保证最终一致性即可，不需要对方法加锁.
 	public void addTaskResult(TaskResult<R> result,CheckJobProcesser checkJob) {
 		if (TaskResultType.Success.equals(result.getResultType())) {
-			successCount.incrementAndGet();
+			successCount.incrementAndGet();//成功数
 		}
-		taskDetailQueue.addLast(result);
-		taskProcesserCount.incrementAndGet();
+		taskDetailQueue.addLast(result);//结果队列
+		taskProcessedCount.incrementAndGet();//已完成任务数（含失败、异常、成功）
 		
-		if(taskProcesserCount.get()==jobLength) {
-			checkJob.putJob(jobName, expireTime);
+		if(taskProcessedCount.get()==jobLength) {//已完成任务数 = 总工作数
+			checkJob.putJob(jobName, expireTime);//工作完成后再检测该工作保存时间是否过期
 		}
 		
 	}

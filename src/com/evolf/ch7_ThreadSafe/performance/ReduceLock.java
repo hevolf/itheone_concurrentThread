@@ -1,4 +1,4 @@
-package com.evolf.ch7.performance;
+package com.evolf.ch7_ThreadSafe.performance;
 
 
 import java.util.HashMap;

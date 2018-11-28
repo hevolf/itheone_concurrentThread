@@ -65,7 +65,7 @@ public class PendingJobPool {
 		public void run() {
 			R r = null;
 			ITaskProcesser<T,R> taskProcesser =
-					(ITaskProcesser<T, R>) jobInfo.getTaskProcesser();
+					(ITaskProcesser<T, R>) jobInfo.getTaskProcessed();
 			TaskResult<R> result = null;
 			
 			try {

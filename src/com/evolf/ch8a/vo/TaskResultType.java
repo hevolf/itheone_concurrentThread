@@ -11,5 +11,5 @@ public enum TaskResultType {
 	//方法成功执行但是返回的是业务人员不需要的结果
 	Failure,
 	//方法执行抛出了Exception
-	Exception;
+	Exception
 }

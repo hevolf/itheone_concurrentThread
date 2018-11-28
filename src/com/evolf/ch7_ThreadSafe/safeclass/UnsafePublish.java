@@ -1,4 +1,4 @@
-package com.evolf.ch7.safeclass;
+package com.evolf.ch7_ThreadSafe.safeclass;
 
 import java.util.ArrayList;
 import java.util.List;

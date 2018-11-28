@@ -1,8 +1,7 @@
-package com.evolf.ch7.tranfer;
+package com.evolf.ch7_ThreadSafe.tranfer;
 
-import com.evolf.ch7.tranfer.service.ITransfer;
-import com.evolf.ch7.tranfer.service.SafeOperateToo;
-import com.evolf.ch7.tranfer.service.TrasnferAccount;
+import com.evolf.ch7_ThreadSafe.tranfer.service.ITransfer;
+import com.evolf.ch7_ThreadSafe.tranfer.service.TrasnferAccount;
 
 /**
  *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 

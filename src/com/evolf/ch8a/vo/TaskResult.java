@@ -6,6 +6,7 @@ package com.evolf.ch8a.vo;
  *类说明：任务处理返回结果实体类
  */
 public class TaskResult<R> {
+	//final 只能get 无法set
 	//方法本身运行是否正确的结果类型
 	private final TaskResultType resultType;
 	//方法的业务结果数据；
@@ -20,7 +21,7 @@ public class TaskResult<R> {
 		this.reason = reason;
 	}
 
-	//方便业务人员使用，这个构造方法表示业务方法执行成功返回的结果
+	//方便业务人员使用，这个构造方法表示业务方法执行成功返回的结果(非set赋值)
 	public TaskResult(TaskResultType resultType, R returnValue) {
 		super();
 		this.resultType = resultType;

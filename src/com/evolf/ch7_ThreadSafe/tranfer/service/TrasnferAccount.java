@@ -1,6 +1,6 @@
-package com.evolf.ch7.tranfer.service;
+package com.evolf.ch7_ThreadSafe.tranfer.service;
 
-import com.evolf.ch7.tranfer.UserAccount;
+import com.evolf.ch7_ThreadSafe.tranfer.UserAccount;
 
 /**
  *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 

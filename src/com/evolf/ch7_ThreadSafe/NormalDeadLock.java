@@ -1,4 +1,4 @@
-package com.evolf.ch7;
+package com.evolf.ch7_ThreadSafe;
 
 import com.evolf.tools.SleepTools;
 
