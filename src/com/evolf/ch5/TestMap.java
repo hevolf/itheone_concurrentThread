@@ -11,10 +11,12 @@ public class TestMap {
         float loadFactor=0.75f; 
         int concurrencyLevel =16;
         
-        if (!(loadFactor > 0) || initialCapacity < 0 || concurrencyLevel <= 0)
+        if (!(loadFactor > 0) || initialCapacity < 0 || concurrencyLevel <= 0) {
             throw new IllegalArgumentException();
-        if (concurrencyLevel > 65536)
+        }
+        if (concurrencyLevel > 65536) {
             concurrencyLevel = 65536;
+        }
         // Find power-of-two sizes best matching arguments
         int sshift = 0;
         int ssize = 1;
@@ -24,14 +26,17 @@ public class TestMap {
         }
         int segmentShift = 32 - sshift;
         int segmentMask = ssize - 1;
-        if (initialCapacity > 1073741824)
+        if (initialCapacity > 1073741824) {
             initialCapacity = 1073741824;
+        }
         int c = initialCapacity / ssize;
-        if (c * ssize < initialCapacity)
+        if (c * ssize < initialCapacity) {
             ++c;
+        }
         int cap = 2;
-        while (cap < c)
+        while (cap < c) {
             cap <<= 1;
+        }
         System.out.println(cap * loadFactor);
         // create segments and segments[0]
 //        Segment<K,V> s0 =

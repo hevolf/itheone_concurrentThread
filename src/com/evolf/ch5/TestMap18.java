@@ -1,5 +1,5 @@
 package com.evolf.ch5;
-
+//移位运算
 public class TestMap18 {
 	public static void main(String[] args) {
 //		ConcurrentHashMap<String,String> map = new ConcurrentHashMap<>();

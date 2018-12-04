@@ -1,4 +1,4 @@
-package com.evolf.ch4_AQS.rw;
+package com.evolf.ch4_AQS.ReentrantReadWriteLock;
 
 import com.evolf.tools.SleepTools;
 
