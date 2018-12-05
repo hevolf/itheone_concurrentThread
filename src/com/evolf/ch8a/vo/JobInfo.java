@@ -84,7 +84,7 @@ public class JobInfo<R> {
 			successCount.incrementAndGet();//成功数
 		}
 		taskDetailQueue.addLast(result);//结果队列 （存在于 jobInfo中，->Pool中大map缓存中）
-		taskProcessedCount.incrementAndGet();//已完成任务数（含失败、异常、成功）
+		taskProcessedCount.incrementAndGet();//已完成任务数（含失败、异常、成功）（使用原子操作，因为所有线程完成任务后都会操作此次数）
 		
 		if(taskProcessedCount.get()==jobLength) {//已完成任务数 = 总工作数
 			//放入检查job中，过期具体实现由checkJob中完成
