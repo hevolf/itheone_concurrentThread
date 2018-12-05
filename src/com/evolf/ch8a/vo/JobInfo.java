@@ -66,12 +66,13 @@ public class JobInfo<R> {
 				+ taskProcessedCount.get()+"] Total["+jobLength+"]";
 	}
 	
-	//获得工作中每个任务的处理详情
+	//获得工作中每个任务的处理详情（即处理结果详情）
 	public List<TaskResult<R>> getTaskDetail(){
 		List<TaskResult<R>> taskList = new LinkedList<>();
 		TaskResult<R> taskResult;
 		//从阻塞队列中拿任务的结果，反复取，一直取到null为止，说明目前队列中最新的任务结果已经取完，可以不取了
 		while((taskResult=taskDetailQueue.pollFirst())!=null) {
+			//从队列中依次取出，然后返回list
 			taskList.add(taskResult);
 		}
 		return taskList;
@@ -82,10 +83,11 @@ public class JobInfo<R> {
 		if (TaskResultType.Success.equals(result.getResultType())) {
 			successCount.incrementAndGet();//成功数
 		}
-		taskDetailQueue.addLast(result);//结果队列
+		taskDetailQueue.addLast(result);//结果队列 （存在于 jobInfo中，->Pool中大map缓存中）
 		taskProcessedCount.incrementAndGet();//已完成任务数（含失败、异常、成功）
 		
 		if(taskProcessedCount.get()==jobLength) {//已完成任务数 = 总工作数
+			//放入检查job中，过期具体实现由checkJob中完成
 			checkJob.putJob(jobName, expireTime);//工作完成后再检测该工作保存时间是否过期
 		}
 		

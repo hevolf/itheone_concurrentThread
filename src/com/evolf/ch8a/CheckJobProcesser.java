@@ -32,9 +32,12 @@ public class CheckJobProcesser {
 		public void run() {
 			while(true) {
 				try {
-					//拿到已经过期的任务
+					//拿到已经过期的任务（采用延时队列，延时时间到才能从队列中获取）
+					// take（阻塞） - remove（异常） - poll（返回） 从头部获取并移除   peek-从头部获取，不移除（只做检查有没有）
+					//使用阻塞方法，如果未取到会一直阻塞等待
 					ItemVo<String> item = queue.take();
 					String jobName =  (String)item.getDate();
+					//根据任务名移除
 					PendingJobPool.getMap().remove(jobName);
 					System.out.println(jobName+" is out of date,remove from map!");
 				} catch (InterruptedException e) {
@@ -47,6 +50,7 @@ public class CheckJobProcesser {
     /*任务完成后，放入队列，经过expireTime时间后，从整个框架中移除*/
     public void putJob(String jobName,long expireTime) {
     	ItemVo<String> item = new ItemVo<String>(expireTime,jobName);
+		//放入队列  offer 有返回值 插入到尾部（返回成功、失败）
     	queue.offer(item);
     	System.out.println("Job["+jobName+"已经放入了过期检查缓存，过期时长："+expireTime);
     }

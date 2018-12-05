@@ -15,28 +15,29 @@ import java.util.concurrent.*;
  */
 public class PendingJobPool {
 	
-	//保守估计
+	//保守估计--计算密集型一般=cpu数，io型=cpu*2，保守一般相等即可
 	private static final int THREAD_COUNTS = 
 			Runtime.getRuntime().availableProcessors();
-	//任务队列
+	//任务队列，用于保存已经提交未来得及处理的任务
 	private static BlockingQueue<Runnable> taskQueue
 	 = new ArrayBlockingQueue<>(5000);
-	//线程池，固定大小，有界队列
+	//线程池，固定大小，有界队列，使用自定义线程池（有界）
 	private static ExecutorService taskExecutor = 
 			new ThreadPoolExecutor(THREAD_COUNTS, THREAD_COUNTS, 60, 
 					TimeUnit.SECONDS, taskQueue);
-	//job的存放容器
+	//job的存放容器（并发容器：Map中的每个task 会并发操作次map，即：存在多线程操作次map）
 	private static ConcurrentHashMap<String, JobInfo<?>> jobInfoMap
 	   = new  ConcurrentHashMap<>();
 	
 	private static CheckJobProcesser checkJob
 	 	= CheckJobProcesser.getInstance();
-	
+
+	//提供获取线程池中job容器（即所有注册job的集合）
 	public static Map<String, JobInfo<?>> getMap(){
 		return jobInfoMap;
 	}
 	
-	//单例模式------
+	//单例模式 （类预占位）------
 	private PendingJobPool() {}
 	
 	private static class JobPoolHolder{
@@ -64,6 +65,7 @@ public class PendingJobPool {
 		@Override
 		public void run() {
 			R r = null;
+			//从提交的job中获取处理该task的处理器（预先定义的数据处理方法，在job注册时进行初始化） （该job肯定预先注册过）
 			ITaskProcesser<T,R> taskProcesser =
 					(ITaskProcesser<T, R>) jobInfo.getTaskProcessed();
 			TaskResult<R> result = null;
@@ -89,12 +91,13 @@ public class PendingJobPool {
 				result = new TaskResult<R>(TaskResultType.Exception, r, 
 						e.getMessage());				
 			}finally {
+				//保存任务处理结果
 				jobInfo.addTaskResult(result,checkJob);
 			}
 		}
 	}
 	
-	//根据工作名称检索工作
+	//根据工作名称检索工作（必要步骤）
 	@SuppressWarnings("unchecked")
 	private <R> JobInfo<R> getJob(String jobName){
 		JobInfo<R> jobInfo = (JobInfo<R>) jobInfoMap.get(jobName);
@@ -107,7 +110,9 @@ public class PendingJobPool {
 	//调用者提交工作中的任务
 	public <T,R> void putTask(String jobName,T t) {
 		JobInfo<R> jobInfo = getJob(jobName);
+		//每提交一个task-t到job  新开一个处理线程  并将该线程任务用线程池运行taskExecutor
 		PendingTask<T,R> task = new PendingTask<T,R>(jobInfo,t);
+		//线程-》线程池
 		taskExecutor.execute(task);
 	}
 	

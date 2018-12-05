@@ -19,6 +19,7 @@ public class MyTask implements ITaskProcesser<Integer,Integer> {
 		Random r = new Random();
 		int flag = r.nextInt(500);
 		SleepTools.ms(flag);
+		System.out.println("myTask正在执行任务：" + data);
 		if(flag<=300) {//正常处理的情况
 			Integer returnValue = data.intValue()+flag;
 			return new TaskResult<Integer>(TaskResultType.Success,returnValue);

@@ -47,11 +47,11 @@ public class AppTest {
 		MyTask myTask = new MyTask();
 		//拿到框架的实例
 		PendingJobPool pool = PendingJobPool.getInstance();
-		//注册job
+		//注册job + 任务处理器myTask（即预定义工作,在pool中进行job初始化，对外封装具体过程，初始化处理器等）（对外只提供了pool，job在内部实现）
 		pool.registerJob(JOB_NAME, JOB_LENGTH, myTask,1000*5);
 		Random r = new Random();
 		for(int i=0;i<JOB_LENGTH;i++) {
-			//依次推入Task
+			//依次推入Task （推入指定job，具体task）
 			pool.putTask(JOB_NAME, r.nextInt(1000));
 		}
 		Thread t = new Thread(new QueryResult(pool));
