@@ -16,17 +16,17 @@ import java.util.concurrent.*;
  */
 public class RpcModeWeb {
 	
-	//负责生成文档
+	//负责生成文档（下载图片，本地写入IO=CPU*2）
 	private static ExecutorService docMakeService 
 		= Executors.newFixedThreadPool(Consts.CPU_COUNT*2); 
 	
-	//负责上传文档
+	//负责上传文档(IO = CPU*2)
 	private static ExecutorService docUploadService 
 		= Executors.newFixedThreadPool(Consts.CPU_COUNT*2);
-	
+	//ch6  先完成的先上传
 	private static CompletionService<String> docCs
 	    = new ExecutorCompletionService<>(docMakeService); 
-	
+	//先上传完的 先回显
 	private static CompletionService<String> docUploadCs
     = new ExecutorCompletionService<>(docUploadService);
 	
@@ -36,7 +36,7 @@ public class RpcModeWeb {
         SL_QuestionBank.initBank();
         System.out.println("题库初始化完成。");
         
-        //创建两个待处理文档
+        //创建60个待处理文档
         List<SrcDocVo> docList = CreatePendingDocs.makePendingDoc(60);
         long startTotal = System.currentTimeMillis();
         
@@ -48,7 +48,7 @@ public class RpcModeWeb {
         	docUploadCs.submit(new UploadDocTask(future.get()));
         }
 
-        //在实际的业务过程中可以不要，主要为了取得时间
+        //在实际的业务过程中可以不要，主要为了取得时间（模拟消耗时间）
         for(SrcDocVo doc:docList){
         	docUploadCs.take().get();
         }
@@ -57,7 +57,7 @@ public class RpcModeWeb {
         		+(System.currentTimeMillis()-startTotal)+"ms-------------");
 	}
 	
-	//生成文档的任务
+	//生成文档的任务 需要返回值传给上传文档任务，所以用Callable
 	private static class MakeDocTask implements Callable<String>{
 		
 		private SrcDocVo pendingDocVo;
@@ -78,7 +78,7 @@ public class RpcModeWeb {
 		}
 	}
 	
-	//上传文档的任务
+	//上传文档的任务 （上传后的地址需要回显，所以callable）
 	private static class UploadDocTask implements Callable<String>{
 		
 		private String filePath;

@@ -6,7 +6,7 @@ package com.evolf.ch8b.vo;
  *类说明：题目实体类
  */
 public class QuestionInDBVo {
-    //题目id
+    //题目id   使用final 可不用考虑并发下安全问题
     private final int id;
     //题目详情，平均长度800字节
     private final String detail;

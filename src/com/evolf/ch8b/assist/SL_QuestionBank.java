@@ -24,7 +24,7 @@ public class SL_QuestionBank {
 
     //初始化题库
     public static void initBank(){
-        for(int i=0;i<Consts.SIZE_OF_QUESTION_BANK;i++){
+        for(int i = 0; i <Consts.SIZE_OF_QUESTION_BANK; i++){
             String questionContent = makeQuestionDetail(Consts.QUESTION_LENGTH);
             questionBankMap.put(i,new QuestionInDBVo(i,
             		questionContent,EncryptUtils.EncryptBySHA1(questionContent)));

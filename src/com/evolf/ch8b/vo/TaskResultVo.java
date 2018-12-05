@@ -13,6 +13,8 @@ public class TaskResultVo {
 	private final String questionDetail;
 	private final Future<QuestionInCacheVo> questionFuture;
 
+
+	//只会返回题目文本（DB/Cache题目摘要一致）  或者  只返回future结果（不一致时）
 	public TaskResultVo(String questionDetail) {
 		this.questionDetail = questionDetail;
 		this.questionFuture = null;
