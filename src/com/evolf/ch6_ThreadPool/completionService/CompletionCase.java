@@ -1,4 +1,4 @@
-package com.evolf.ch6_ThreadPool.comps;
+package com.evolf.ch6_ThreadPool.completionService;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,12 +21,13 @@ public class CompletionCase {
     	AtomicInteger count = new AtomicInteger(0);
         // 创建线程池
         ExecutorService pool = Executors.newFixedThreadPool(POOL_SIZE);
-        //容器存放提交给线程池的任务,list,map,
+        //容器存放提交给线程池的任务,list,map,  Linked有序
         BlockingQueue<Future<Integer>> queue = 
         		new LinkedBlockingQueue<Future<Integer>>();
 
         // 向里面扔任务
         for (int i = 0; i < TOTAL_TASK; i++) {
+            //调用submit向 池中丢任务
             Future<Integer> future = pool.submit(new WorkTask("ExecTask" + i));
             queue.add(future);//i=0 先进队列，i=1的任务跟着进  （submit执行完后返回值加入到队列中保存）
         }
@@ -45,7 +46,7 @@ public class CompletionCase {
         		+(System.currentTimeMillis()-start)+" ms");
     }
 
-    // 方法二，通过CompletionService来实现获取线程池中任务的返回结果
+    // 方法二，通过CompletionService来实现获取线程池中任务的返回结果（先有结果的先返回）
     public void testByCompletion() throws Exception {
     	long start = System.currentTimeMillis();
     	AtomicInteger count = new AtomicInteger(0);
@@ -53,7 +54,7 @@ public class CompletionCase {
         ExecutorService pool = Executors.newFixedThreadPool(POOL_SIZE);
         CompletionService<Integer> cService = new ExecutorCompletionService<>(pool);
         
-        // 向里面扔任务
+        // 向里面扔任务 调用submit向 池中丢任务
         for (int i = 0; i < TOTAL_TASK; i++) {
         	cService.submit(new WorkTask("ExecTask" + i));
         }

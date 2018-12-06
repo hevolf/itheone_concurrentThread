@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class SL_QuestionBank {
 
-    //存储题库数据,key就是题目的id，value就是题目的详情
+    //存储题库数据,key就是题目的id，value就是题目的详情（从数据库中获取的数据map）
     private static ConcurrentHashMap<Integer,QuestionInDBVo> questionBankMap
             = new ConcurrentHashMap<>();
     //定时任务池，负责定时更新题库数据

@@ -16,7 +16,7 @@ public class CreatePendingDocs {
 
     /**
      * 生成一批待处理文档
-     * @param docCount 生成的文档数量
+     * @param count 生成的文档数量
      * @return 待处理文档列表
      */
     public static List<SrcDocVo> makePendingDoc(int count){
@@ -25,7 +25,7 @@ public class CreatePendingDocs {
         List<SrcDocVo> docList = new LinkedList<>();
         for(int i=0;i<count;i++){
             List<Integer> questionList = new LinkedList<Integer>();
-            //每个文档中包含的题目列表
+            //每个文档中包含的题目列表（仅包含ID，未包含题目具体内容）
             for(int j=0;j< Consts.QUESTION_COUNT_IN_DOC;j++){
                 int questionId = r.nextInt(Consts.SIZE_OF_QUESTION_BANK);
                 questionList.add(questionId);

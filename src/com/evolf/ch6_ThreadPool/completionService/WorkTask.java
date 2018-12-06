@@ -1,4 +1,4 @@
-package com.evolf.ch6_ThreadPool.comps;
+package com.evolf.ch6_ThreadPool.completionService;
 
 import java.util.Random;
 import java.util.concurrent.Callable;

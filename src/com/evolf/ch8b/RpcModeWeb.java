@@ -39,13 +39,16 @@ public class RpcModeWeb {
         //创建60个待处理文档
         List<SrcDocVo> docList = CreatePendingDocs.makePendingDoc(60);
         long startTotal = System.currentTimeMillis();
-        
+
+        //生成文档 交给线程池 线程池static全局
         for(SrcDocVo doc:docList){
         	docCs.submit(new MakeDocTask(doc));
         }
+
+        //上传文档  交给线程池
         for(SrcDocVo doc:docList){
         	Future<String> future = docCs.take();
-        	docUploadCs.submit(new UploadDocTask(future.get()));
+        	docUploadCs.submit(new UploadDocTask(future.get()));//future.get()获取结果
         }
 
         //在实际的业务过程中可以不要，主要为了取得时间（模拟消耗时间）
@@ -59,7 +62,7 @@ public class RpcModeWeb {
 	
 	//生成文档的任务 需要返回值传给上传文档任务，所以用Callable
 	private static class MakeDocTask implements Callable<String>{
-		
+		//待处理文档模板类（包含文档名、题目id列表；待填充具体题目然后生成文档文件）
 		private SrcDocVo pendingDocVo;
 		
 		public MakeDocTask(SrcDocVo pendingDocVo) {
@@ -70,8 +73,8 @@ public class RpcModeWeb {
 		@Override
 		public String call() throws Exception {
 			long start = System.currentTimeMillis();
-            //String localName = ProduceDocService.makeDoc(pendingDocVo);
-			String localName = ProduceDocService.makeDocAsyn(pendingDocVo);
+            //String localName = ProduceDocService.makeDoc(pendingDocVo);//优化前
+			String localName = ProduceDocService.makeDocAsyn(pendingDocVo);//优化后
             System.out.println("文档"+localName+"生成耗时："
             		+(System.currentTimeMillis()-start)+"ms");
 			return localName;

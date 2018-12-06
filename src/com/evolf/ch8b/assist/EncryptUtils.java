@@ -99,7 +99,7 @@ public class EncryptUtils {
     }
 
     /**
-     *
+     * 位数组 转 16进制
      * @param bts
      * @return
      */
