@@ -19,7 +19,7 @@ public class ParallerQstService {
 	private static ConcurrentHashMap<Integer, QuestionInCacheVo> questionCache 
 	  = new ConcurrentHashMap<>();
 	
-	//正在处理题目的缓存
+	//正在处理题目的缓存（必须考虑缓存失效机制，如不管题目处理成功或失败，必须从处理中移除）FutureTask 为已创建出的任务 还未交给线程（交给线程执行后 future.get()获取返回值）
 	private static ConcurrentHashMap<Integer, Future<QuestionInCacheVo>> 
 		processingQuestionCache = new ConcurrentHashMap<>();
 
@@ -58,25 +58,25 @@ public class ParallerQstService {
 				QuestionInDBVo qstDbVo = SL_QuestionBank.getQuetion(questionId);
 				QuestionTask questionTask = new QuestionTask(qstDbVo,questionId);
 				/*不靠谱的，无法避免两个线程处理同一个题目
-				questionFuture = makeQuestionService.submit(questionTask);
+				questionFuture = makeQuestionService.submit(questionTask);//存在线程1 submit一次，线程2 submit一次，因为2读取时还是null（线程1submit时，线程2已经put）
 				processingQuestionCache.putIfAbsent(questionId, questionFuture);
 				改成
-				processingQuestionCache.putIfAbsent(questionId, questionFuture);
+				processingQuestionCache.putIfAbsent(questionId, questionFuture);//questionFuture 为null ，无法进行put
 				questionFuture = makeQuestionService.submit(questionTask);
 				也不行
 				*/
 				FutureTask<QuestionInCacheVo> ft 
-					= new FutureTask<QuestionInCacheVo>(questionTask);//ft为一个即将执行处理题目的线程（new出实例，未start状态，放入线程池中才开始）
+					= new FutureTask<QuestionInCacheVo>(questionTask);//ft为一个即将执行处理题目的线程（new出实例，未start状态，放入线程池中才开始,因为泛型才如此定义）
 				//加入处理中题目缓存
-				questionFuture = processingQuestionCache.putIfAbsent(questionId, 
-						ft);
+				questionFuture = processingQuestionCache.putIfAbsent(questionId, ft);//先把ft 加入题目缓存map中占位 （即先尝试直接将此任务线程放进处理中map）
+				// （putIfAbsent   如果传入key对应的value已经存在，就返回存在的value，不进行替换。如果不存在，就添加key和value，返回null）
 				if(questionFuture==null) {
 					//先在map中占位？？？？？？？？？？？ 本线程判断map中为null 将questionFuture置非null，则其他线程同时查出null时
 					//当前线程从map中获取为null，此时map中无写入，其他线程读取也是null，可能同时启动生成题目任务
 					questionFuture = ft;
-					makeQuestionService.execute(ft);
+					makeQuestionService.execute(ft);//execute 非submit
 					System.out.println("成功启动了题目["+questionId+"]的计算任务，请等待完成>>>>>>>>");
-				}else {
+				}else {//如果不为null，说明已经有线程将此题目放入缓存
 					System.out.println("<<<<<<<<<<<有其他线程刚刚启动了题目["+questionId
 							+"]的计算任务，本任务无需开启！");
 				}
