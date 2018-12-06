@@ -6,7 +6,7 @@ import com.evolf.tools.SleepTools;
 import java.util.Random;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：不会产生死锁的安全转账第二种方法，尝试拿锁
  */

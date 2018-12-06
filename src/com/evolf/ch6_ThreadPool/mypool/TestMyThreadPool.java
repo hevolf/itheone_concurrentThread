@@ -3,7 +3,7 @@ package com.evolf.ch6_ThreadPool.mypool;
 import java.util.Random;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：
  */

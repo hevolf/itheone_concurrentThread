@@ -8,7 +8,7 @@ import com.evolf.tools.SleepTools;
 import java.util.Random;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：一个实际任务类，将数值加上一个随机数，并休眠随机时间
  */

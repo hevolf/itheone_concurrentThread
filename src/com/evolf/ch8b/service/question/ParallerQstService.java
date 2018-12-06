@@ -9,7 +9,7 @@ import com.evolf.ch8b.vo.TaskResultVo;
 import java.util.concurrent.*;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：并发处理题目的服务（已处理的题目放入缓存，防止重复处理题目）
  */

@@ -5,7 +5,7 @@ import com.evolf.ch5.blockingqueue.ItemVo;
 import java.util.concurrent.DelayQueue;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：任务完成后,在一定的时间供查询，之后为释放资源节约内存，需要定期处理过期的任务
  */

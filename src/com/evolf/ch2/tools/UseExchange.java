@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.concurrent.Exchanger;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：Exchange的使用  用于 两个 线程 之间交换数据
  */

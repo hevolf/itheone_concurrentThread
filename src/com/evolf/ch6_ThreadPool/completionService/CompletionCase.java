@@ -4,7 +4,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com
+ *@author Mark老师   itheone itheone
  * CompletionService 任务先有结果的先入队列，所以输出结果是有序的
  *
  *类说明：

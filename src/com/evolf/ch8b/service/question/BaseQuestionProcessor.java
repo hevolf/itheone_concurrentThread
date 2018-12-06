@@ -5,7 +5,7 @@ import com.evolf.ch8b.assist.SL_Busi;
 import java.util.Random;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：单个题目的处理器，可以看成DAO层
  */

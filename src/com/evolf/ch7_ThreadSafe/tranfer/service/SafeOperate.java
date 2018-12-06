@@ -3,7 +3,7 @@ package com.evolf.ch7_ThreadSafe.tranfer.service;
 import com.evolf.ch7_ThreadSafe.tranfer.UserAccount;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：不会产生死锁的安全转账
  */

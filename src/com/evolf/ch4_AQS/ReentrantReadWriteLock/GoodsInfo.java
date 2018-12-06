@@ -1,7 +1,7 @@
 package com.evolf.ch4_AQS.ReentrantReadWriteLock;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：商品的实体类
  */

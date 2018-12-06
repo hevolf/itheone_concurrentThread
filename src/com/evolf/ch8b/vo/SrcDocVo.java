@@ -3,7 +3,7 @@ package com.evolf.ch8b.vo;
 import java.util.List;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：待处理文档实体类
  */

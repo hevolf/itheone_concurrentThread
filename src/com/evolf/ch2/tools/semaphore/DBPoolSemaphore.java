@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.concurrent.Semaphore;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：演示Semaphore用法，一个数据库连接池的实现
  */

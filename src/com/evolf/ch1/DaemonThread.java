@@ -3,7 +3,7 @@ package com.evolf.ch1;
 import java.util.concurrent.ExecutionException;
 
 /**
- * @author Mark老师 享学课堂 https://enjoy.ke.qq.com
+ * @author Mark老师 itheone itheone
  *
  *  类说明：守护线程的使用和守护线程中的finally语句块
  */

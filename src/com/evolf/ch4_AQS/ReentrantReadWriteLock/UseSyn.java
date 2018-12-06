@@ -3,7 +3,7 @@ package com.evolf.ch4_AQS.ReentrantReadWriteLock;
 import com.evolf.tools.SleepTools;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：用内置锁来实现商品服务接口
  */

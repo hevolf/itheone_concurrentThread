@@ -3,7 +3,7 @@ package com.evolf.ch1.volatitle;
 import com.evolf.tools.SleepTools;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：演示violate无法提供操作的原子性
  */

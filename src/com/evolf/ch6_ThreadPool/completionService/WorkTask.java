@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：任务类
  */

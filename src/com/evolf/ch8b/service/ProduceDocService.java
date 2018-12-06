@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：处理文档的服务，包括文档中题目的处理和文档生成后的上传
  */

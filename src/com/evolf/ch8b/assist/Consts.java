@@ -1,7 +1,7 @@
 package com.evolf.ch8b.assist;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author Mark老师   itheone itheone
  *
  *类说明：系统常量类
  */
