@@ -1,6 +1,6 @@
 package com.evolf.ch8a;
 
-import com.evolf.ch5.blockingqueue.ItemVo;
+import com.evolf.ch5_MapAndQueue.blockingqueue.ItemVo;
 
 import java.util.concurrent.DelayQueue;
 

@@ -1,4 +1,4 @@
-package com.evolf.ch5.bitwise;
+package com.evolf.ch5_MapAndQueue.bitwise;
 /**
  *@author Mark老师   itheone itheone
  *

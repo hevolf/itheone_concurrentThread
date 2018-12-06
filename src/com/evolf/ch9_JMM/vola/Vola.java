@@ -1,4 +1,4 @@
-package com.evolf.ch9.vola;
+package com.evolf.ch9_JMM.vola;
 
 public class Vola {
     volatile long i = 0L;  // 使用volatile声明64位的long型变量

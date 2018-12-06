@@ -1,4 +1,4 @@
-package com.evolf.ch9;
+package com.evolf.ch9_JMM;
 
 public class AsIfSerial {
 	

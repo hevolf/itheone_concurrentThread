@@ -1,4 +1,4 @@
-package com.evolf.ch9.vola;
+package com.evolf.ch9_JMM.vola;
 
 public class VolaSemanteme {
 	int a = 0;

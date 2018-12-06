@@ -1,4 +1,4 @@
-package com.evolf.ch5;///*
+package com.evolf.ch5_MapAndQueue;///*
 // * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
 // *
 // *
@@ -33,7 +33,7 @@ package com.evolf.ch5;///*
 // * http://creativecommons.org/publicdomain/zero/1.0/
 // */
 //
-//package com.evolf.ch5;
+//package com.evolf.ch5_MapAndQueue;
 //import java.util.concurrent.ConcurrentMap;
 //import java.util.concurrent.locks.*;
 //import java.util.*;

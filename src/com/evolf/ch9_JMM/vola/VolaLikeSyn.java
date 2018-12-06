@@ -1,4 +1,4 @@
-package com.evolf.ch9.vola;
+package com.evolf.ch9_JMM.vola;
 
 public class VolaLikeSyn {
     long i = 0L;  // 普通的long型变量

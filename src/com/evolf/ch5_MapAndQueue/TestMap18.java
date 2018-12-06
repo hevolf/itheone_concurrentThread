@@ -1,4 +1,4 @@
-package com.evolf.ch5;
+package com.evolf.ch5_MapAndQueue;
 //移位运算
 public class TestMap18 {
 	public static void main(String[] args) {

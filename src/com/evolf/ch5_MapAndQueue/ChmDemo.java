@@ -1,4 +1,4 @@
-package com.evolf.ch5;
+package com.evolf.ch5_MapAndQueue;
 
 import java.util.concurrent.ConcurrentHashMap;
 
