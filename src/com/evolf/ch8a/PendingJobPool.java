@@ -37,7 +37,7 @@ public class PendingJobPool {
 		return jobInfoMap;
 	}
 	
-	//单例模式 （类预占位）------
+	//单例模式 （类预占位）------ static
 	private PendingJobPool() {}
 	
 	private static class JobPoolHolder{
