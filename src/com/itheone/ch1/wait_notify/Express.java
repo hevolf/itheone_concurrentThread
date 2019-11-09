@@ -1,4 +1,4 @@
-package com.itheone.ch1.wn;
+package com.itheone.ch1.wait_notify;
 
 /**
  *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 

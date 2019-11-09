@@ -1,16 +1,16 @@
-package com.itheone.ch1.vola;
+package com.itheone.ch1.volatile_unsafe;
 
 import com.itheone.tools.SleepTools;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
+ *@author
  *
  *类说明：演示violate无法提供操作的原子性
  */
 public class VolatileUnsafe {
 	
 	private static class VolatileVar implements Runnable {
-
+		//VolatileVar 类变量
 		private volatile int a = 0;
 		
 	    @Override
