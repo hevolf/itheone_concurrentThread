@@ -50,6 +50,7 @@ public class AppTest {
 		//注册job
 		pool.registerJob(JOB_NAME, JOB_LENGTH, myTask,1000*5);
 		Random r = new Random();
+		// 传入具体参数，线程池执行job
 		for(int i=0;i<JOB_LENGTH;i++) {
 			//依次推入Task
 			pool.putTask(JOB_NAME, r.nextInt(1000));
