@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.concurrent.*;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
  * 框架的主体类，也是调用者主要使用的类
  */
 public class PendingJobPool {

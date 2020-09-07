@@ -8,7 +8,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
  *
  *类说明：提交给框架执行的工作实体类,工作：表示本批次需要处理的同性质任务(Task)的一个集合
  */
